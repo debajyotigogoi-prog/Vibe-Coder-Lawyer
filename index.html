@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deb Gogoi — Global Mobility Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #F2EBDD;
+    --cream-2: #E8E0CE;
+    --paper: #EFE6D2;
+    --ink: #14110D;
+    --ink-2: #1F1B14;
+    --ink-soft: #2A2519;
+    --rust: #C2410C;
+    --rust-deep: #9A3412;
+    --olive: #5C5D3A;
+    --mute: #6B6353;
+    --line: rgba(20, 17, 13, 0.16);
+    --line-soft: rgba(20, 17, 13, 0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    cursor: none;
+  }
+
+  /* Subtle grain */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 9000;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: .07;
+    mix-blend-mode: multiply;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed; top: 0; left: 0;
+    width: 14px; height: 14px;
+    background: var(--ink);
+    border-radius: 50%;
+    pointer-events: none; z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: width .25s ease, height .25s ease, background .25s ease, opacity .25s;
+    mix-blend-mode: difference;
+  }
+  .cursor.lg { width: 90px; height: 90px; background: var(--rust); mix-blend-mode: normal; }
+  .cursor.lg::after { content: 'view'; font-family: 'Fraunces', serif; font-style: italic; font-size: 14px; color: var(--cream); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+  @media (max-width: 900px) { body { cursor: auto; } .cursor { display: none; } }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 800;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.6rem 2.5rem;
+    mix-blend-mode: difference;
+    color: var(--cream);
+  }
+  .nav-mark {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    color: inherit;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .nav-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--rust); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .6; transform: scale(.8); } }
+  .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem; letter-spacing: 0.04em;
+    color: inherit; text-decoration: none;
+    font-weight: 400; position: relative;
+    padding: 0.3rem 0;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1px; background: currentColor;
+    transform: scaleX(0); transform-origin: right;
+    transition: transform .4s cubic-bezier(.7,0,.3,1);
+  }
+  .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+  .nav-time { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.05em; opacity: .8; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 8rem 2.5rem 3rem;
+    position: relative;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+
+  .hero-top {
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: start; gap: 2rem;
+    margin-bottom: auto; padding-top: 2rem;
+  }
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--mute);
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+  .hero-tag::before { content: ''; width: 1.6rem; height: 1px; background: var(--ink); }
+  .hero-availability {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 0.05em; color: var(--ink); text-align: right;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .avail-dot { width: 7px; height: 7px; border-radius: 50%; background: #4D7C0F; box-shadow: 0 0 0 4px rgba(77, 124, 15, 0.18); }
+
+  .hero-main {
+    display: grid; grid-template-columns: 1.2fr 0.85fr;
+    gap: 3rem; align-items: end; position: relative;
+  }
+  .hero-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(5rem, 14vw, 17rem);
+    line-height: 0.86;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+  .hero-name .first { display: block; }
+  .hero-name .last { display: block; font-style: italic; font-weight: 300; color: var(--ink); margin-left: 0.5em; }
+  .hero-name .last span { color: var(--rust); }
+
+  .hero-figure {
+    position: relative;
+    align-self: end;
+    height: clamp(22rem, 38vw, 44rem);
+    display: flex; justify-content: center; align-items: end;
+  }
+  .hero-figure img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    object-position: bottom;
+    filter: drop-shadow(0 20px 40px rgba(20,17,13,0.18));
+    animation: floaty 6s ease-in-out infinite;
+  }
+  @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+  .hero-figure::before {
+    content: ''; position: absolute; bottom: -10px; left: 10%; right: 10%;
+    height: 18px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(20,17,13,0.25) 0%, transparent 70%);
+    filter: blur(8px);
+    z-index: -1;
+  }
+
+  .hero-bottom {
+    display: grid; grid-template-columns: 1fr auto auto;
+    gap: 3rem; align-items: end;
+    padding-top: 3rem;
+  }
+  .hero-lede {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+    line-height: 1.4;
+    color: var(--ink-2);
+    max-width: 38ch;
+  }
+  .hero-lede em { font-style: italic; color: var(--rust-deep); }
+  .hero-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--mute);
+    line-height: 1.9;
+  }
+  .hero-meta strong { color: var(--ink); font-weight: 500; }
+  .scroll-indicator {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--mute);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  /* MARQUEE */
+  .marquee {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 1.4rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-flex; gap: 3rem;
+    animation: scroll 38s linear infinite;
+    align-items: center;
+  }
+  .marquee-track span {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem; font-weight: 400;
+    color: var(--ink); display: inline-flex; align-items: center; gap: 3rem;
+  }
+  .marquee-track em { font-style: italic; color: var(--rust); }
+  .marquee-track .star { font-family: 'Fraunces', serif; color: var(--rust); }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* SECTIONS */
+  section { padding: 7rem 2.5rem; position: relative; }
+  .section-head {
+    display: grid; grid-template-columns: 0.9fr 1.4fr;
+    gap: 4rem; margin-bottom: 4rem; align-items: end;
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.08em;
+    color: var(--mute); margin-bottom: 0.6rem;
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--rust);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(2.4rem, 5.5vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+  .section-title em { font-style: italic; color: var(--rust); }
+  .section-body p {
+    font-size: 1rem; line-height: 1.65;
+    color: var(--ink-soft); margin-bottom: 1rem;
+  }
+  .section-body p:first-child {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem; font-weight: 400; line-height: 1.5;
+    color: var(--ink); margin-bottom: 1.5rem;
+  }
+
+  /* ABOUT with video */
+  .about { background: var(--cream); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1.1fr;
+    gap: 5rem; align-items: start;
+  }
+  .about-video {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    background: var(--ink);
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  .about-video video {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+  }
+  .video-tag {
+    position: absolute; top: 1rem; left: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--cream);
+    background: rgba(20,17,13,0.65);
+    backdrop-filter: blur(8px);
+    padding: 0.4rem 0.7rem; border-radius: 3px;
+    display: flex; align-items: center; gap: 0.45rem;
+  }
+  .video-tag .rec { width: 7px; height: 7px; border-radius: 50%; background: var(--rust); animation: pulse 1.5s ease-in-out infinite; }
+
+  .video-controls {
+    position: absolute; bottom: 1rem; right: 1rem;
+    display: flex; gap: 0.5rem;
+  }
+  .vc-btn {
+    width: 38px; height: 38px;
+    background: rgba(242, 235, 221, 0.92);
+    backdrop-filter: blur(8px);
+    border: none; border-radius: 50%;
+    cursor: none; display: flex; align-items: center; justify-content: center;
+    color: var(--ink); transition: background .25s;
+  }
+  .vc-btn:hover { background: var(--rust); color: var(--cream); }
+
+  .about-copy { padding-top: 1rem; }
+  .about-lead {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+    line-height: 1.35;
+    color: var(--ink); margin-bottom: 2rem;
+    letter-spacing: -0.015em;
+  }
+  .about-lead em { font-style: italic; color: var(--rust); }
+  .about-p {
+    font-size: 0.98rem; line-height: 1.75;
+    color: var(--ink-soft); margin-bottom: 1.1rem;
+  }
+  .creds {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-top: 2rem;
+  }
+  .cred {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.04em;
+    color: var(--ink); padding: 0.45rem 0.85rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    transition: all .25s;
+  }
+  .cred:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+  /* PHASES */
+  .phases {
+    margin-top: 6rem;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  .phase {
+    padding: 2.5rem 1.8rem 2.5rem 0;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  .phase:last-child { border-right: none; padding-right: 0; }
+  .phase:not(:first-child) { padding-left: 1.8rem; }
+
+  .phase-head {
+    display: flex; align-items: baseline; gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+  .phase-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.08em;
+    color: var(--rust);
+  }
+  .phase-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.08em;
+    color: var(--mute); text-transform: uppercase;
+  }
+  .phase-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 2.2rem; line-height: 1;
+    color: var(--ink); margin-bottom: 1.6rem;
+    letter-spacing: -0.02em;
+  }
+  .phase-title em { font-style: italic; color: var(--rust); }
+  .phase-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .phase-list li {
+    font-size: 0.88rem; line-height: 1.55;
+    color: var(--ink-soft);
+    padding-left: 1rem;
+    position: relative;
+  }
+  .phase-list li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--rust); font-weight: 500;
+  }
+
+  /* WORK / CASE STUDIES */
+  .work { background: var(--ink); color: var(--cream); }
+  .work .section-title { color: var(--cream); }
+  .work .section-label { color: #E0A872; }
+  .work .section-num { color: rgba(242,235,221,0.45); }
+  .work .section-body p { color: rgba(242,235,221,0.7); }
+  .work .section-body p:first-child { color: var(--cream); }
+
+  .work-list { display: flex; flex-direction: column; }
+  .work-item {
+    padding: 3.5rem 0;
+    border-top: 1px solid rgba(242,235,221,0.12);
+    cursor: none;
+    transition: padding-left .4s cubic-bezier(.7,0,.3,1);
+    position: relative;
+  }
+  .work-row {
+    display: grid; grid-template-columns: auto 1fr auto auto;
+    align-items: center; gap: 3rem;
+  }
+  .work-item:last-child { border-bottom: 1px solid rgba(242,235,221,0.12); }
+  .work-item:hover { padding-left: 1.5rem; }
+
+  .work-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.06em;
+    color: rgba(242,235,221,0.4);
+  }
+  .work-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(1.6rem, 3.2vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+  }
+  .work-title em { font-style: italic; color: #E0A872; transition: color .3s; }
+  .work-item:hover .work-title em { color: var(--rust); }
+
+  .work-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.08em;
+    color: rgba(242,235,221,0.55);
+    text-align: right; line-height: 1.6;
+  }
+  .work-meta strong { color: var(--cream); display: block; font-weight: 500; }
+
+  /* Expandable details */
+  .work-details {
+    max-height: 0; overflow: hidden;
+    transition: max-height .6s cubic-bezier(.7,0,.3,1), opacity .4s, padding-top .4s;
+    opacity: 0;
+  }
+  .work-item.open .work-details { max-height: 1000px; opacity: 1; padding-top: 2rem; }
+  .work-item.open { padding-left: 1.5rem; }
+
+  .work-detail-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; padding: 0 0 1rem;
+    border-top: 1px solid rgba(242,235,221,0.08);
+    padding-top: 2rem;
+  }
+  .wd-pull {
+    font-family: 'Fraunces', serif;
+    font-style: italic; font-weight: 300;
+    font-size: 1.3rem; line-height: 1.5;
+    color: var(--cream);
+    border-left: 2px solid var(--rust);
+    padding-left: 1.2rem;
+    grid-column: 1 / -1;
+    margin-bottom: 1rem;
+  }
+  .wd-col-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: #E0A872;
+    margin-bottom: 0.7rem;
+  }
+  .wd-col-body {
+    font-size: 0.92rem; line-height: 1.7;
+    color: rgba(242,235,221,0.78);
+  }
+  .wd-stats {
+    grid-column: 1 / -1;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0;
+    border: 1px solid rgba(242,235,221,0.15);
+    margin-top: 1rem;
+  }
+  .wd-stat {
+    padding: 1.1rem 1.3rem;
+    border-right: 1px solid rgba(242,235,221,0.15);
+  }
+  .wd-stat:last-child { border-right: none; }
+  .wd-stat-n {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem; font-weight: 300;
+    color: #E0A872; line-height: 1; margin-bottom: 0.3rem;
+  }
+  .wd-stat-l {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.06em;
+    color: rgba(242,235,221,0.55);
+  }
+
+  .work-toggle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.08em;
+    color: rgba(242,235,221,0.5);
+    text-transform: uppercase;
+    transition: color .25s;
+  }
+  .work-item:hover .work-toggle { color: #E0A872; }
+  .work-item.open .work-toggle::before { content: '— '; }
+  .work-item:not(.open) .work-toggle::before { content: '+ '; }
+
+  /* CAPABILITIES */
+  .caps { background: var(--cream-2); }
+  .caps-list { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+  .cap {
+    display: grid; grid-template-columns: 4rem 1fr 8rem;
+    gap: 2rem; padding: 2rem 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+    transition: padding-left .3s;
+  }
+  .cap:hover { padding-left: 1rem; }
+  .cap-n {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.08em;
+    color: var(--mute); padding-top: 0.4rem;
+  }
+  .cap-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem; font-weight: 400;
+    line-height: 1.2; letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+  .cap-desc {
+    font-size: 0.92rem; line-height: 1.65;
+    color: var(--ink-soft); max-width: 60ch;
+  }
+  .cap-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rust); padding: 0.4rem 0.8rem;
+    border: 1px solid var(--rust);
+    border-radius: 999px; text-align: center;
+    align-self: start;
+    width: fit-content;
+    margin-top: 0.3rem;
+  }
+
+  /* IMPACT */
+  .impact { background: var(--cream); padding: 8rem 2.5rem; }
+  .impact-stmt {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(2.5rem, 6vw, 6rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    max-width: 22ch;
+    margin: 0 auto 5rem;
+    text-align: center;
+  }
+  .impact-stmt em { font-style: italic; color: var(--rust); }
+
+  .impact-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  .imp-cell {
+    padding: 2.5rem 1.5rem;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .imp-cell:nth-child(4n) { border-right: none; }
+  .imp-cell:nth-last-child(-n+4) { border-bottom: none; }
+  .imp-n {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    font-weight: 300; line-height: 1;
+    color: var(--rust); margin-bottom: 0.6rem;
+    letter-spacing: -0.02em;
+    display: block;
+  }
+  .imp-n em { font-style: italic; }
+  .imp-l {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.05em;
+    color: var(--ink-soft); line-height: 1.5;
+  }
+
+  /* CONTACT */
+  .contact {
+    background: var(--ink); color: var(--cream);
+    padding: 8rem 2.5rem 3rem;
+    position: relative; overflow: hidden;
+  }
+  .contact-cta {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(3rem, 9vw, 11rem);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    color: var(--cream);
+    margin-bottom: 4rem;
+  }
+  .contact-cta em { font-style: italic; color: #E0A872; }
+  .contact-cta a {
+    color: var(--cream); text-decoration: none;
+    border-bottom: 2px solid var(--rust);
+    transition: color .3s;
+    display: inline-block;
+  }
+  .contact-cta a:hover { color: var(--rust); }
+
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem; padding-top: 3rem;
+    border-top: 1px solid rgba(242,235,221,0.15);
+  }
+  .ct-block h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(242,235,221,0.5);
+    margin-bottom: 1rem; font-weight: 400;
+  }
+  .ct-block a, .ct-block p {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem; font-weight: 300;
+    color: var(--cream); text-decoration: none;
+    line-height: 1.5; display: block;
+    transition: color .25s;
+  }
+  .ct-block a:hover { color: #E0A872; }
+  .ct-block p { color: rgba(242,235,221,0.7); }
+
+  .contact-foot {
+    margin-top: 5rem; padding-top: 2rem;
+    border-top: 1px solid rgba(242,235,221,0.12);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.06em;
+    color: rgba(242,235,221,0.55);
+  }
+
+  /* REVEAL */
+  .r { opacity: 0; transform: translateY(30px); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.6,.2,1); }
+  .r.on { opacity: 1; transform: none; }
+  .r.d1 { transition-delay: .1s; } .r.d2 { transition-delay: .2s; } .r.d3 { transition-delay: .3s; } .r.d4 { transition-delay: .4s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .hero-main { grid-template-columns: 1fr; }
+    .hero-figure { height: 28rem; margin-top: 2rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .phases { grid-template-columns: 1fr; }
+    .phase { border-right: none; border-bottom: 1px solid var(--line); padding: 2rem 0 !important; }
+    .phase:last-child { border-bottom: none; }
+    .section-head { grid-template-columns: 1fr; gap: 2rem; }
+    .impact-stats { grid-template-columns: repeat(2, 1fr); }
+    .imp-cell:nth-child(2n) { border-right: none; }
+    .imp-cell:nth-child(4n) { border-right: none; }
+    .imp-cell:nth-last-child(-n+4) { border-bottom: 1px solid var(--line); }
+    .imp-cell:nth-last-child(-n+2) { border-bottom: none; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .work-row { grid-template-columns: auto 1fr auto; gap: 1.5rem; }
+    .work-meta { display: none; }
+    .wd-stats { grid-template-columns: repeat(2, 1fr); }
+    .wd-stat:nth-child(2n) { border-right: none; }
+    .work-detail-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .cap { grid-template-columns: 3rem 1fr; }
+    .cap-type { display: none; }
+    .nav-time { display: none; }
+    .nav-links { gap: 1.2rem; }
+    .nav-links a:nth-child(n+4) { display: none; }
+  }
+  @media (max-width: 700px) {
+    nav { padding: 1.2rem 1.5rem; }
+    section, .hero, .impact, .contact { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .nav-links { display: none; }
+    .hero-bottom { grid-template-columns: 1fr; gap: 2rem; }
+    .scroll-indicator { display: none; }
+    .impact-stats { grid-template-columns: 1fr; }
+    .imp-cell { border-right: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a class="nav-mark" href="#"><span class="nav-dot"></span>Deb Gogoi</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-time" id="time">— —:—</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-top">
+    <p class="hero-tag">Portfolio · 2026</p>
+    <p class="hero-availability"><span class="avail-dot"></span>Available for new engagements</p>
+  </div>
+
+  <div class="hero-main">
+    <h1 class="hero-name">
+      <span class="first">Deb</span>
+      <span class="last">Gogoi<span>.</span></span>
+    </h1>
+    <div class="hero-figure">
+      <img src="assets/deb-toon.jpg" alt="Deb Gogoi illustrated portrait" />
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <p class="hero-lede">A global mobility &amp; immigration leader who <em>builds, transforms and scales</em> entire functions — across 150+ countries, 19+ years, 20,000+ cases.</p>
+    <div class="hero-meta">
+      <strong>Based</strong><br>India · Global<br><br>
+      <strong>Discipline</strong><br>Function Architecture<br>Transformation
+    </div>
+    <div class="scroll-indicator">↓ Scroll</div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Function Architect <span class="star">✦</span> <em>Transformation Specialist</em> <span class="star">✦</span> 150+ Countries <span class="star">✦</span> <em>20,000+ Immigration Cases</em> <span class="star">✦</span> $800K Annual Savings <span class="star">✦</span> <em>0 → 1 Builder</em> <span class="star">✦</span></span>
+    <span>Function Architect <span class="star">✦</span> <em>Transformation Specialist</em> <span class="star">✦</span> 150+ Countries <span class="star">✦</span> <em>20,000+ Immigration Cases</em> <span class="star">✦</span> $800K Annual Savings <span class="star">✦</span> <em>0 → 1 Builder</em> <span class="star">✦</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-head">
+    <div>
+      <p class="section-num r">— 01 / About</p>
+      <p class="section-label r">Who I Am</p>
+    </div>
+    <div>
+      <h2 class="section-title r d1">I don't just <em>run</em> mobility.<br>I <em>build</em> it.</h2>
+    </div>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-video r">
+      <video autoplay muted loop playsinline id="bio-video">
+        <source src="assets/deb-video.mp4" type="video/mp4" />
+      </video>
+      <div class="video-tag"><span class="rec"></span>Live · 2026</div>
+      <div class="video-controls">
+        <button class="vc-btn" id="muteBtn" aria-label="Toggle sound" data-cursor="ignore">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </button>
+        <button class="vc-btn" id="playBtn" aria-label="Play / pause" data-cursor="ignore">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="about-copy r d1">
+      <p class="about-lead">Over <em>19+ years</em>, I've worked across <em>150+ countries</em> helping organizations design, transform, and scale their global mobility functions — across EMEA, APAC, LATAM, and the Americas.</p>
+      <p class="about-p">My work sits at the intersection of compliance, workforce strategy, and operational execution — bringing structure where none exists, efficiency to broken processes, and governance to programs that have outgrown their foundations.</p>
+      <p class="about-p">With dual academic grounding in HR leadership (MBA) and law (LL.B.), I approach every engagement with both strategic clarity and legal precision — a rare combination in the global mobility landscape.</p>
+      <div class="creds">
+        <span class="cred">MBA · HR</span>
+        <span class="cred">LL.B. · Law</span>
+        <span class="cred">PMP</span>
+        <span class="cred">Lean Six Sigma — Black Belt</span>
+        <span class="cred">Power BI</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="phases">
+    <div class="phase r">
+      <div class="phase-head"><span class="phase-num">/01</span><span class="phase-tag">Build</span></div>
+      <h3 class="phase-title">0 → <em>1</em></h3>
+      <ul class="phase-list">
+        <li>Mobility frameworks where none exist</li>
+        <li>Policy, workflow &amp; governance design</li>
+        <li>Compliance-first operating foundations</li>
+        <li>Vendor &amp; legal-entity scaffolding</li>
+      </ul>
+    </div>
+    <div class="phase r d1">
+      <div class="phase-head"><span class="phase-num">/02</span><span class="phase-tag">Transform</span></div>
+      <h3 class="phase-title">Fragmented → <em>Structured</em></h3>
+      <ul class="phase-list">
+        <li>Re-engineering disconnected practices</li>
+        <li>Standardizing policy with audit-grade rigor</li>
+        <li>Automation at enterprise scale</li>
+        <li>Cost reduction without UX erosion</li>
+      </ul>
+    </div>
+    <div class="phase r d2">
+      <div class="phase-head"><span class="phase-num">/03</span><span class="phase-tag">Scale</span></div>
+      <h3 class="phase-title">Regional → <em>Global</em></h3>
+      <ul class="phase-list">
+        <li>150+ country mobility expansion</li>
+        <li>Real-time mobility intelligence</li>
+        <li>Audit-ready governance layers</li>
+        <li>Aligned with workforce strategy</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="section-head">
+    <div>
+      <p class="section-num r">— 02 / Selected Work</p>
+      <p class="section-label r">Case Studies</p>
+    </div>
+    <div>
+      <h2 class="section-title r d1">Work that <em>speaks</em><br>for itself.</h2>
+    </div>
+  </div>
+
+  <div class="work-list" id="workList">
+    <article class="work-item">
+      <div class="work-row">
+      <span class="work-num">01 ——</span>
+      <h3 class="work-title">$800K annual <em>savings</em> — global mobility cost optimization</h3>
+      <div class="work-meta"><strong>Teradata</strong>2023 — 2024<br>Cost · Vendor</div>
+      <span class="work-toggle">Read</span>
+      </div>
+      <div class="work-details">
+        <div class="work-detail-grid">
+          <p class="wd-pull">Program ran at $4M annually with inconsistent vendor pricing. The mandate: reduce cost without touching compliance or experience.</p>
+          <div>
+            <p class="wd-col-label">Approach</p>
+            <p class="wd-col-body">Conducted detailed cost analysis across immigration, relocation, and vendor services. Renegotiated contracts, standardized relocation benefits, and guided business leaders to cost-efficient assignment models without reducing program quality.</p>
+          </div>
+          <div>
+            <p class="wd-col-label">Result</p>
+            <p class="wd-col-body">Reduced program costs by $800K annually (20%, $4M → $3.2M) within year one. Improved vendor accountability via restructured SLAs. Created predictable, benchmarked cost structure giving leadership clear visibility into mobility spend.</p>
+          </div>
+          <div class="wd-stats">
+            <div class="wd-stat"><div class="wd-stat-n">$800K</div><div class="wd-stat-l">Annual savings</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">20%</div><div class="wd-stat-l">Cost reduction</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">$4M → $3.2M</div><div class="wd-stat-l">Program spend</div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="work-item">
+      <div class="work-row">
+      <span class="work-num">02 ——</span>
+      <h3 class="work-title">Global HR ServiceNow transformation — <em>5 months</em> ahead of schedule</h3>
+      <div class="work-meta"><strong>Teradata</strong>2022<br>Tech · Policy</div>
+      <span class="work-toggle">Read</span>
+      </div>
+      <div class="work-details">
+        <div class="work-detail-grid">
+          <p class="wd-pull">HR processes scattered across 14 SharePoint sites with 150+ policies and siloed regional teams. The org needed a single platform — and a timeline that held.</p>
+          <div>
+            <p class="wd-col-label">Approach</p>
+            <p class="wd-col-body">Partnered with leadership and regional heads on a phased implementation of 8 HR modules. Consolidated 150+ policies into 4 master frameworks. Migrated 2,700 knowledge articles into a structured ServiceNow environment with unified case management.</p>
+          </div>
+          <div>
+            <p class="wd-col-label">Result</p>
+            <p class="wd-col-body">Delivered 5 months ahead of the 12-month timeline. Service visibility improved globally. Manual case handling reduced significantly. All HR processes unified on a single, searchable platform with audit-grade documentation from day one.</p>
+          </div>
+          <div class="wd-stats">
+            <div class="wd-stat"><div class="wd-stat-n">5 mo</div><div class="wd-stat-l">Ahead of schedule</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">8</div><div class="wd-stat-l">Modules deployed</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">2,700</div><div class="wd-stat-l">Articles migrated</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">4</div><div class="wd-stat-l">Frameworks</div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="work-item">
+      <div class="work-row">
+      <span class="work-num">03 ——</span>
+      <h3 class="work-title">Zero compliance <em>breaches</em> — COVID-19 global mobility crisis</h3>
+      <div class="work-meta"><strong>Teradata</strong>2021 — 2022<br>Crisis Mgmt</div>
+      <span class="work-toggle">Read</span>
+      </div>
+      <div class="work-details">
+        <div class="work-detail-grid">
+          <p class="wd-pull">Borders closed overnight. Employees stranded internationally and separated from families. Most mobility functions entered reactive chaos. This one didn't.</p>
+          <div>
+            <p class="wd-col-label">Approach</p>
+            <p class="wd-col-body">Managed live cross-border mobility for 10,000+ employees across 21+ countries as travel bans and visa suspensions cascaded. Coordinated with Legal, HR, Risk, Travel, and International SOS. Monitored country restrictions in real time and prioritized high-risk cases.</p>
+          </div>
+          <div>
+            <p class="wd-col-label">Result</p>
+            <p class="wd-col-body">Safely relocated all impacted employees and reunified families while maintaining compliance controls in every active country throughout the crisis. Zero work-authorization breaches. Zero compliance failures. 100% mobility outcomes maintained.</p>
+          </div>
+          <div class="wd-stats">
+            <div class="wd-stat"><div class="wd-stat-n">100%</div><div class="wd-stat-l">Outcomes</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">Zero</div><div class="wd-stat-l">Breaches</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">21+</div><div class="wd-stat-l">Countries</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">10K+</div><div class="wd-stat-l">Employees</div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="work-item">
+      <div class="work-row">
+      <span class="work-num">04 ——</span>
+      <h3 class="work-title">Power BI mobility reporting — <em>ISO-aligned</em> audit framework</h3>
+      <div class="work-meta"><strong>Evalueserve</strong>2018 — 2020<br>Analytics</div>
+      <span class="work-toggle">Read</span>
+      </div>
+      <div class="work-details">
+        <div class="work-detail-grid">
+          <p class="wd-pull">Mobility data tracked in decentralized Excel files — security risk, inconsistent reporting, zero leadership visibility. The infrastructure had to change.</p>
+          <div>
+            <p class="wd-col-label">Approach</p>
+            <p class="wd-col-body">Integrated live data feeds from Workday and ServiceNow via Transcend into a centralized Power BI environment. Implemented role-based access across stakeholder groups. Automated daily refresh — eliminating manual reporting steps and creating a single governed source of mobility truth.</p>
+          </div>
+          <div>
+            <p class="wd-col-label">Result</p>
+            <p class="wd-col-body">Eliminated multiple manual reporting steps and associated human-error risk. Improved data integrity across all mobility reporting. Delivered an ISO-aligned, audit-ready system replacing spreadsheet chaos with governance-grade analytics infrastructure.</p>
+          </div>
+          <div class="wd-stats">
+            <div class="wd-stat"><div class="wd-stat-n">ISO</div><div class="wd-stat-l">Aligned reporting</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">Zero</div><div class="wd-stat-l">Manual steps</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">Multi</div><div class="wd-stat-l">Stakeholder groups</div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="work-item">
+      <div class="work-row">
+      <span class="work-num">05 ——</span>
+      <h3 class="work-title">140+ policies <em>consolidated</em> into four governing frameworks</h3>
+      <div class="work-meta"><strong>Consulting</strong>Policy Architecture<br>Governance</div>
+      <span class="work-toggle">Read</span>
+      </div>
+      <div class="work-details">
+        <div class="work-detail-grid">
+          <p class="wd-pull">An organization carrying 140+ fragmented policies isn't protected by them — it's buried under them. The work was to bring clarity without losing a single line of coverage.</p>
+          <div>
+            <p class="wd-col-label">Approach</p>
+            <p class="wd-col-body">Over 140 individual mobility and immigration policies had accumulated — inconsistent, contradictory, impossible to operationalize at scale. Fine-tuned and consolidated all into four governing frameworks. Remaining policies restructured as process manuals and SOPs — actionable, auditable, version-controlled.</p>
+          </div>
+          <div>
+            <p class="wd-col-label">Result</p>
+            <p class="wd-col-body">Document sprawl became a single navigable governance architecture. Teams no longer cross-referencing conflicting documents. A clear, organization-wide source of truth established for HR, legal, and assignees — with full SOP coverage retained.</p>
+          </div>
+          <div class="wd-stats">
+            <div class="wd-stat"><div class="wd-stat-n">140+</div><div class="wd-stat-l">Policies</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">4</div><div class="wd-stat-l">Frameworks</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">Full</div><div class="wd-stat-l">SOP coverage</div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="work-item">
+      <div class="work-row">
+      <span class="work-num">06 ——</span>
+      <h3 class="work-title">Ceipal → JobDiva — full platform <em>migration</em> &amp; ATS build in 3 months</h3>
+      <div class="work-meta"><strong>Consulting</strong>3-month sprint<br>Platform</div>
+      <span class="work-toggle">Read</span>
+      </div>
+      <div class="work-details">
+        <div class="work-detail-grid">
+          <p class="wd-pull">Not a simple data transfer — a full architectural rebuild. Modular SaaS to unified PaaS, while simultaneously designing org structure, reporting hierarchy, and ATS configuration from the ground up.</p>
+          <div>
+            <p class="wd-col-label">Approach</p>
+            <p class="wd-col-body">Four parallel workstreams: full data migration into JobDiva's unified database; org structure built from scratch (divisions, branches, BUs, client hierarchies); reporting architecture (manager-recruiter chains, approvals, role-based access); end-to-end ATS configuration (job board integrations, VMS sync, requisition workflows).</p>
+          </div>
+          <div>
+            <p class="wd-col-label">Result</p>
+            <p class="wd-col-body">Most technically complex deliverable: rebuilding approval workflow architecture — multi-level timesheet flows, electronic offer authorization, VMS submission routing, compliance checkpoints — documented into a legacy approval portfolio giving the org a permanent, auditable record.</p>
+          </div>
+          <div class="wd-stats">
+            <div class="wd-stat"><div class="wd-stat-n">3 mo</div><div class="wd-stat-l">Full build</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">4</div><div class="wd-stat-l">Workstreams</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">Zero</div><div class="wd-stat-l">Disruption</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">100%</div><div class="wd-stat-l">Data integrity</div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="work-item">
+      <div class="work-row">
+      <span class="work-num">07 ——</span>
+      <h3 class="work-title">Audit &amp; compliance — <em>25%</em> gap reduction</h3>
+      <div class="work-meta"><strong>Capgemini</strong>2008 — 2009<br>Audit · Risk</div>
+      <span class="work-toggle">Read</span>
+      </div>
+      <div class="work-details">
+        <div class="work-detail-grid">
+          <p class="wd-pull">An internal review uncovered inconsistent documentation across regions — real audit exposure that had been quietly building for years.</p>
+          <div>
+            <p class="wd-col-label">Approach</p>
+            <p class="wd-col-body">Standardized documentation checklists across all regions. Centralized case records in a structured system. Introduced validation checkpoints at critical workflow junctures. Trained the full team on compliance expectations and established periodic internal control reviews.</p>
+          </div>
+          <div>
+            <p class="wd-col-label">Result</p>
+            <p class="wd-col-body">Within the next audit cycle, documentation accuracy improved significantly across all regions. Compliance gaps reduced by over 25%. Audit readiness and regulatory confidence strengthened — a long-standing vulnerability turned into demonstrable strength.</p>
+          </div>
+          <div class="wd-stats">
+            <div class="wd-stat"><div class="wd-stat-n">25%+</div><div class="wd-stat-l">Gap reduction</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">Ready</div><div class="wd-stat-l">All regions</div></div>
+            <div class="wd-stat"><div class="wd-stat-n">Full</div><div class="wd-stat-l">Team trained</div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section class="caps" id="capabilities">
+  <div class="section-head">
+    <div>
+      <p class="section-num r">— 03 / Capabilities</p>
+      <p class="section-label r">Where I create leverage</p>
+    </div>
+    <div>
+      <h2 class="section-title r d1">Not a coordinator.<br>An <em>architect.</em></h2>
+    </div>
+  </div>
+
+  <div class="caps-list">
+    <div class="cap r"><span class="cap-n">/01</span><div><div class="cap-name">Mobility function architecture</div><div class="cap-desc">Designing programs from scratch — policy design, operating model, vendor selection, and governance aligned to business strategy and multi-jurisdictional compliance.</div></div><span class="cap-type">Build</span></div>
+    <div class="cap r"><span class="cap-n">/02</span><div><div class="cap-name">Program transformation</div><div class="cap-desc">Re-engineering legacy or fragmented operations into centralized, structured models — eliminating duplication, reducing cost, and introducing automation without disrupting employee movement.</div></div><span class="cap-type">Transform</span></div>
+    <div class="cap r"><span class="cap-n">/03</span><div><div class="cap-name">Immigration case management</div><div class="cap-desc">End-to-end management of high-volume cases across 150+ countries. Deep expertise across US, UK, EMEA, and APAC frameworks — including precedent-level case strategy and crisis response.</div></div><span class="cap-type">Operations</span></div>
+    <div class="cap r"><span class="cap-n">/04</span><div><div class="cap-name">Compliance &amp; governance</div><div class="cap-desc">Audit-ready systems across multiple jurisdictions — immigration compliance, tax equalization, social security agreements, and right-to-work verification at enterprise scale.</div></div><span class="cap-type">Governance</span></div>
+    <div class="cap r"><span class="cap-n">/05</span><div><div class="cap-name">Technology &amp; analytics</div><div class="cap-desc">Embedding Workday, ServiceNow, and Power BI into mobility ecosystems. ISO-aligned reporting frameworks — translating operational data into leadership-ready mobility intelligence.</div></div><span class="cap-type">Tech</span></div>
+    <div class="cap r"><span class="cap-n">/06</span><div><div class="cap-name">Policy design &amp; consolidation</div><div class="cap-desc">Rationalizing and redesigning compensation, benefits, and relocation policies — from fragmented legacy policies into governing frameworks with full SOP coverage retained.</div></div><span class="cap-type">Policy</span></div>
+    <div class="cap r"><span class="cap-n">/07</span><div><div class="cap-name">Assignee experience design</div><div class="cap-desc">Structuring the full assignee lifecycle — pre-departure through repatriation — with emphasis on wellbeing, duty of care, and retention through structured mobility journeys.</div></div><span class="cap-type">Experience</span></div>
+    <div class="cap r"><span class="cap-n">/08</span><div><div class="cap-name">Vendor &amp; RMC management</div><div class="cap-desc">Managing global vendor ecosystems — immigration counsel, RMCs, tax advisors, housing providers — across SLAs, contract negotiations, and performance governance frameworks.</div></div><span class="cap-type">Operations</span></div>
+    <div class="cap r"><span class="cap-n">/09</span><div><div class="cap-name">Legal entity advisory</div><div class="cap-desc">Specialized consulting for US federal suppliers and multinationals establishing legal entities in new geographies — covering compliance structuring, entity setup, and operational readiness.</div></div><span class="cap-type">Advisory</span></div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="impact" id="impact">
+  <div class="section-head">
+    <div>
+      <p class="section-num r">— 04 / Numbers</p>
+      <p class="section-label r">Measurable Impact</p>
+    </div>
+  </div>
+  <h2 class="impact-stmt r">Numbers that <em>define</em> the work.</h2>
+
+  <div class="impact-stats">
+    <div class="imp-cell r"><span class="imp-n">150<em>+</em></span><span class="imp-l">Countries managed</span></div>
+    <div class="imp-cell r d1"><span class="imp-n">20K<em>+</em></span><span class="imp-l">Immigration cases</span></div>
+    <div class="imp-cell r d2"><span class="imp-n">$800K</span><span class="imp-l">Annual savings delivered</span></div>
+    <div class="imp-cell r d3"><span class="imp-n">56</span><span class="imp-l">Global team members led</span></div>
+    <div class="imp-cell r"><span class="imp-n">60<em>%</em></span><span class="imp-l">Operational cost reduction</span></div>
+    <div class="imp-cell r d1"><span class="imp-n">19<em>+</em></span><span class="imp-l">Years of leadership</span></div>
+    <div class="imp-cell r d2"><span class="imp-n">10K<em>+</em></span><span class="imp-l">Employees mobilized</span></div>
+    <div class="imp-cell r d3"><span class="imp-n">Zero</span><span class="imp-l">Compliance breaches</span></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2 class="contact-cta r">
+    Let's build<br>
+    <em>something</em><br>
+    <a href="mailto:deb@debgogoi.com">together →</a>
+  </h2>
+
+  <div class="contact-grid">
+    <div class="ct-block r">
+      <h4>Email</h4>
+      <a href="mailto:deb@debgogoi.com">deb@debgogoi.com</a>
+    </div>
+    <div class="ct-block r d1">
+      <h4>LinkedIn</h4>
+      <a href="https://linkedin.com/in/debgogoi" target="_blank" rel="noopener">linkedin.com/in/debgogoi</a>
+    </div>
+    <div class="ct-block r d2">
+      <h4>Engagements</h4>
+      <p>Consulting · Advisory · Fractional Leadership</p>
+    </div>
+  </div>
+
+  <div class="contact-foot">
+    <span>© 2026 Deb Gogoi. All rights reserved.</span>
+    <span>Global Mobility · Function Architect · Transformation</span>
+  </div>
+</section>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  let cx = 0, cy = 0, tx = 0, ty = 0;
+  document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
+  function tick() {
+    cx += (tx - cx) * 0.18;
+    cy += (ty - cy) * 0.18;
+    cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%,-50%)`;
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  document.querySelectorAll('.work-item, a, button, .cred').forEach(el => {
+    if (el.dataset.cursor === 'ignore') return;
+    el.addEventListener('mouseenter', () => cursor.classList.add('lg'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('lg'));
+  });
+
+  // Time
+  function updateTime() {
+    const d = new Date();
+    const h = String(d.getHours()).padStart(2,'0');
+    const m = String(d.getMinutes()).padStart(2,'0');
+    document.getElementById('time').textContent = `IST ${h}:${m}`;
+  }
+  updateTime(); setInterval(updateTime, 30000);
+
+  // Reveal
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.r').forEach(el => io.observe(el));
+
+  // Work item expand
+  document.querySelectorAll('.work-item').forEach(item => {
+    item.addEventListener('click', () => {
+      item.classList.toggle('open');
+    });
+  });
+
+  // Video controls
+  const video = document.getElementById('bio-video');
+  const muteBtn = document.getElementById('muteBtn');
+  const playBtn = document.getElementById('playBtn');
+
+  if (video) {
+    muteBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      video.muted = !video.muted;
+      muteBtn.innerHTML = video.muted
+        ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>'
+        : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>';
+    });
+    playBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      if (video.paused) {
+        video.play();
+        playBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+      } else {
+        video.pause();
+        playBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+      }
+    });
+  }
+</script>
+</body>
+</html>
